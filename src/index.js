@@ -1,19 +1,23 @@
-import './style.css'
-import onChange from 'on-change'
 import i18next from 'i18next'
 
 import resources from '../locales/index.js'
 import validate from './validate.js'
-import { isValid, renderErrors, initialRender } from './render.js'
+import { watch, initialRender } from './view.js'
+import { proxy, loader } from './loader.js'
+// import parser from './parser.js'
 
 export default async () => {
   const stateUI = {
-    errors: '',
+    isValid: true,
+    message: '',
     field: '',
+    state: 'filling', // loading, parsing
   }
 
   const state = {
     list: [],
+    feeds: [],
+    posts: [],
   }
 
   const defaultLang = 'ru'
@@ -32,25 +36,35 @@ export default async () => {
     form: document.querySelector('form'),
   }
 
-  const watchedStateUI = onChange(stateUI, () => {
-    validate(stateUI, state.list, i18n)
-      .then(() => renderErrors(elements, stateUI))
-  })
+  const watchedStateUI = watch(elements, stateUI)
 
-  elements.input.addEventListener('input', (e) => {
+  elements.input.addEventListener('input', async (e) => {
     const { value } = e.target
-    watchedStateUI.field = value
-    console.log(stateUI)
+    stateUI.field = value
+    stateUI.state = 'filling'
+    await validate(watchedStateUI, state.list, i18n)
+    // console.log(stateUI)
   })
 
-  elements.form.addEventListener('submit', (e) => {
+  elements.form.addEventListener('submit', async (e) => {
     e.preventDefault()
-    if (isValid(stateUI)) {
-      state.list.push(stateUI.field)
-      watchedStateUI.field = ''
-      elements.input.value = ''
-      elements.input.focus()
-    }
-    console.log(stateUI.field, state.list)
+
+    if (!stateUI.isValid) return
+
+    state.list.push(stateUI.field)
+    watchedStateUI.field = ''
+    elements.input.value = ''
+    elements.input.focus()
+
+    const lastURL = proxy(state.list.at(-1))
+    // const { response, message } = await loader(lastURL)
+    const response = await loader(lastURL)
+    // watchedStateUI.message = message
+    // console.log(message)
+    console.log(response)
+    // console.log(parser(response))
+
+    // renderLists('app')
+    // console.log(stateUI.field, state.list)
   })
 }
