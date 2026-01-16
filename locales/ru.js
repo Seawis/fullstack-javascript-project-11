@@ -21,6 +21,18 @@ export default {
         min_few: 'Минимум {{count}} символа',
         min_many: 'Минимум {{count}} символов',
       },
+      loader: {
+        network: 'Ошибка сети',
+        err: 'Ошибка',
+      },
+      parser: {
+        err: 'Ресурс не содержит валидный RSS',
+        noErr: 'RSS успешно загружен',
+      },
     },
+
+    posts: 'Посты',
+    feeds: 'Фиды',
+    postButton: 'Просмотр',
   },
 }

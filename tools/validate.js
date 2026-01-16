@@ -27,10 +27,10 @@ export default (state, list, i18n) => {
   return rssSchema.validate({ url })
     .then(() => {
       state.message = ''
-      state.isValid = true
+      state.isUrlValid = true
     })
     .catch((err) => {
       state.message = err.errors.map(e => i18n.t(e.key, e.values))
-      state.isValid = false
+      state.isUrlValid = false
     })
 }
