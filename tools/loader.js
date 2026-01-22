@@ -6,7 +6,6 @@ const proxy = (url, base = 'https://allorigins.hexlet.app/get') => {
   // const searchUrl = encodeURI(url)
   newUrl.searchParams.set('disableCache', 'true')
   newUrl.searchParams.set('url', url)
-  console.log(newUrl)
   return newUrl
 }
 
@@ -17,10 +16,11 @@ const loader = async (url, state, i18n) => {
     state.message = i18n.t('load')
     const response = await axios.get(url)
 
-    const status = response.data.status
-    state.message = status.error
-      ? `${i18n.t('errors.loader.err')} ${status.error.name} ${status.error.code}`
-      : ''
+    state.message = ''
+    // const status = response.data.status
+    // state.message = status.error
+    // ? `${i18n.t('errors.loader.err')} ${status.error.name} ${status.error.code}`
+    // : ''
 
     return response.data.contents
   }

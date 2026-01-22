@@ -12,4 +12,4 @@ build:
 	NODE_ENV=production npx vite build
 
 test:
-	echo no tests
+	npx playwright test

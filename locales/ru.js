@@ -13,10 +13,10 @@ export default {
     errors: {
       validation: {
         invalid: 'Неправильное значение',
-        required: 'URL обязателен', // 'это обязательное поле',
+        required: 'URL обязателен',
         wrongURL: 'Неверный формат URL',
-        matches: 'Только http/https',
-        notOneOf: 'Ссылка уже есть в списке',
+        matches: 'Ссылка должна быть валидным URL', // Только http/https
+        notOneOf: 'RSS уже существует', // Ссылка уже есть в списке
         min_one: 'Минимум {{count}} символ',
         min_few: 'Минимум {{count}} символа',
         min_many: 'Минимум {{count}} символов',
