@@ -13,6 +13,7 @@ const loader = async (url, state, i18n) => {
   state.state = 'loading'
 
   try {
+    state.message = i18n.t('load')
     const response = await axios.get(url)
 
     const status = response.data.status

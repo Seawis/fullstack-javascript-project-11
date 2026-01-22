@@ -1,4 +1,6 @@
-export default (data, state, lists, i18n, id) => {
+import _ from 'lodash'
+
+export default (data, state, lists, i18n) => {
   state.state = 'parsing'
   const parseData = new DOMParser().parseFromString(data, 'application/xml')
 
@@ -15,7 +17,6 @@ export default (data, state, lists, i18n, id) => {
   const feed = {
     title: parseData.querySelector('title').textContent,
     description: parseData.querySelector('description').textContent,
-    id: id,
   }
   if (lists.feeds.filter(f => f.title === feed.title).length === 0) {
     lists.feeds.push(feed)
@@ -26,18 +27,16 @@ export default (data, state, lists, i18n, id) => {
   parseData.querySelectorAll('item').forEach((item) => {
     const postTitle = item.querySelector('title').textContent
 
-    if (!lists.postsTitle.includes(postTitle)) {
-      lists.postsTitle.push(postTitle)
+    if (lists.posts.filter(p => p.title === postTitle).length !== 0) return
 
-      const post = {
-        title: postTitle,
-        description: item.querySelector('description').textContent,
-        link: new URL(item.querySelector('link').textContent),
-        // pubDate: item.querySelector('pubDate').textContent,
-        id: id,
-      }
-      posts.unshift(post)
+    const post = {
+      title: postTitle,
+      description: item.querySelector('description').textContent,
+      link: new URL(item.querySelector('link').textContent),
+      readed: false,
+      id: _.uniqueId(),
     }
+    posts.unshift(post)
   })
   lists.posts.push(...posts)
 

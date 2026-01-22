@@ -34,5 +34,11 @@ export default {
     posts: 'Посты',
     feeds: 'Фиды',
     postButton: 'Просмотр',
+    load: 'Загрузка...',
+
+    modal: {
+      read: 'Читать полностью',
+      close: 'Закрыть',
+    },
   },
 }

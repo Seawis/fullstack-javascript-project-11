@@ -11,9 +11,9 @@ const initialRender = (id) => {
   div.classList.add('row')
   sec.append(div)
 
-  const divEvent = document.createElement('div')
-  divEvent.classList.add('col-md-10', 'col-lg-8', 'order-1', 'mx-auto', 'posts')
-  div.append(divEvent)
+  const divPosts = document.createElement('div')
+  divPosts.classList.add('col-md-10', 'col-lg-8', 'order-1', 'mx-auto', 'posts')
+  div.append(divPosts)
 
   const divFeed = document.createElement('div')
   divFeed.classList.add('col-md-10', 'col-lg-4', 'mx-auto', 'order-0', 'order-lg-1', 'feeds')
@@ -61,7 +61,7 @@ const render = (state, i18n) => {
       ulPosts.prepend(li)
 
       const a = document.createElement('a')
-      a.classList.add('fw-bold')
+      post.readed ? a.classList.add('fw-normal') : a.classList.add('fw-bold')
       a.setAttribute('href', post.link)
       a.setAttribute('target', '_blank')
       a.setAttribute('rel', 'noopener' + 'noreferrer')
@@ -97,7 +97,21 @@ const render = (state, i18n) => {
     })
   }
 
-  return onChange(state, () => view())
+  const renderModal = () => {
+    if (state.modalPostId === null) return
+    const i = state.posts.findIndex(p => p.id === state.modalPostId)
+    const modalPost = state.posts[i]
+
+    const modal = document.querySelector(`#modal`)
+    modal.querySelector('.modal-title').textContent = modalPost.title
+    modal.querySelector('.modal-body').textContent = modalPost.description
+    modal.querySelector('a').href = modalPost.link // .href
+  }
+
+  return onChange(state, () => {
+    view()
+    renderModal()
+  })
 }
 
 export { initialRender, render }

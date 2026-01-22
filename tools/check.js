@@ -13,8 +13,7 @@ const checkRss = (state, i18n) => {
   state.list.forEach(async (url) => {
     const rssData = await loader(proxy(url), updaterStateUI, i18n)
     if (rssData !== null) {
-      const id = state.list.indexOf(url) + 1
-      parser(rssData, updaterStateUI, state, i18n, id)
+      parser(rssData, updaterStateUI, state, i18n)
     }
   })
   setTimeout(() => checkRss(state, i18n), 5000)
