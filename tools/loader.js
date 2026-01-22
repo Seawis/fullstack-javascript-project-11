@@ -6,6 +6,7 @@ const proxy = (url, base = 'https://allorigins.hexlet.app/get') => {
   // const searchUrl = encodeURI(url)
   newUrl.searchParams.set('disableCache', 'true')
   newUrl.searchParams.set('url', url)
+  console.log(newUrl)
   return newUrl
 }
 
