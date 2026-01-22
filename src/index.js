@@ -48,9 +48,7 @@ const app = async () => {
 
   elements.input.addEventListener('input', async (e) => {
     const { value } = e.target
-    stateUI.field = value === 'https://example-rss.test/feed.rss'
-      ? 'https://lorem-rss.hexlet.app/feed'
-      : value.trim().replace(/\/+$/, '')
+    stateUI.field = value.trim().replace(/\/+$/, '')
     stateUI.state = 'filling'
     await validate(watchedStateUI, state.list, i18n)
   })

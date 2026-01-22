@@ -3,9 +3,9 @@ import axios from 'axios'
 const proxy = (url, base = 'https://allorigins.hexlet.app/get') => {
   // 'https://allorigins.hexlet.app/get', https://api.allorigins.win/get, https://cors-anywhere.herokuapp.com/
   const newUrl = new URL(base)
-  const searchUrl = encodeURI(url)
+  // const searchUrl = encodeURI(url)
   newUrl.searchParams.set('disableCache', 'true')
-  newUrl.searchParams.set('url', searchUrl)
+  newUrl.searchParams.set('url', url)
   return newUrl
 }
 
