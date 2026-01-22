@@ -2,17 +2,14 @@ install:
 	npm ci
 
 develop:
-	npm run dev
+	npx vite
 
 lint:
 	npx eslint --fix .
 
 build:
 	rm -rf dist
-	NODE_ENV=production npm run build
+	NODE_ENV=production npx vite build
 
 test:
 	echo no tests
-
-vite:
-	npx vite
