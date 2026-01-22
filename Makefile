@@ -8,7 +8,7 @@ lint:
 	npx eslint --fix .
 
 build:
-    rm -rf dist
+	rm -rf dist
 	NODE_ENV=production npm run build
 
 test:
