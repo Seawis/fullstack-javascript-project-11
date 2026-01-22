@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "RSS",
+  "main": "index.js",
   "homepage": "https://github.com/Seawis/fullstack-javascript-project-11#readme",
   "bugs": {
     "url": "https://github.com/Seawis/fullstack-javascript-project-11/issues"
