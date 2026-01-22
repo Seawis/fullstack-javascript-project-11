@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-export default (data, state, lists, i18n) => {
+const parser = (data, state, lists, i18n) => {
   state.state = 'parsing'
   const parseData = new DOMParser().parseFromString(data, 'application/xml')
 
@@ -27,7 +27,7 @@ export default (data, state, lists, i18n) => {
   parseData.querySelectorAll('item').forEach((item) => {
     const postTitle = item.querySelector('title').textContent
 
-    if (lists.posts.filter(p => p.title === postTitle).length !== 0) return
+    if (lists.posts.some(p => p.title === postTitle)) return
 
     const post = {
       title: postTitle,
@@ -42,3 +42,5 @@ export default (data, state, lists, i18n) => {
 
   return { feeds: [feed], posts }
 }
+
+export default parser

@@ -9,7 +9,7 @@ import { watch, initialWatch } from '../view/view.js'
 import { render, initialRender } from '../view/render.js'
 import initialModal from '../view/modal.js'
 
-export default async () => {
+const app = async () => {
   const stateUI = {
     isUrlValid: true,
     isParseValid: false,
@@ -94,3 +94,5 @@ export default async () => {
     }
   })
 }
+
+export default app

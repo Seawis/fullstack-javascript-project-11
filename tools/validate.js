@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export default (state, list, i18n) => {
+const validate = (state, list, i18n) => {
   yup.setLocale({
     mixed: {
       default: () => ({ key: 'errors.validation.invalid' }),
@@ -34,3 +34,5 @@ export default (state, list, i18n) => {
       state.isUrlValid = false
     })
 }
+
+export default validate
